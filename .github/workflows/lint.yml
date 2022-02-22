@@ -23,4 +23,4 @@ jobs:
         with:
           operation: ansible-lint
           command: -x
-          arguments: 601,602 heat.yml
+          arguments: 601,602,703 heat.yml
