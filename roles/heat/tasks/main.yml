@@ -1,0 +1,12 @@
+---
+
+- name: Check of Evanti Heat Agent is Supported
+  assert:
+   that:
+       - ( ansible_os_family == 'Windows' )
+       - ( ansible_system_vendor != 'Microsoft Corporation' )
+   fail_msg: " {{ ansible_distribution }} is not supported or is not Windows Family"
+
+- name: Install and Configure Evanti Heat Agent for Windows
+  include: "{{ action_type }}_evanti_heat_win.yml"
+  when: ansible_os_family == "Windows"

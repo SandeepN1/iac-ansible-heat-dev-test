@@ -1,0 +1,37 @@
+---
+
+- name: Download and install Evanti Heat package from s3 bucket
+
+  block:
+
+    - name: Create Temporary build directory to Copy Binary for Windows
+      win_tempfile:
+        state: directory
+        prefix: evantiheat
+        path: C:\Temp
+      register: tempfile_evantiheat
+
+    - name: Source AWS Credentials for Copy to work
+      win_file:
+        path: "{{ ansible_user_dir }}/.aws"
+        state: directory
+
+    - name: Copy Creds for AWS s3 to work for windows
+      win_copy:
+         src: "creds"
+         dest: "{{ ansible_user_dir }}/.aws/credentials"
+      no_log: true
+
+
+    - name: Download from s3 bucket when evantiheat_s3_bucket is set install binary file
+      win_command: "aws s3 cp s3://{{ evantiheat_s3_bucket }}/{{ evantiheat_s3_path }}/{{ evantiheat_pkg_windows }} {{ tempfile_evantiheat.path }}"
+      no_log: true
+
+  always:
+
+    - name: Cleanup credentials
+      win_file:
+         path: "{{ ansible_user_dir }}/.aws/credentials"
+         state: absent
+
+  when: not evantiheat_already_installed

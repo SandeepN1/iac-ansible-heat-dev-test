@@ -1,0 +1,14 @@
+---
+
+- name: Configure Evanti Heat Agent and Service
+
+  block:
+
+
+    - name: Enable and start service evantiheat
+      win_service:
+       name: 'EMSS Agent'
+       state: started
+       start_mode: auto
+
+  when: not evantiheat_already_installed

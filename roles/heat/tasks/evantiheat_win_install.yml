@@ -1,0 +1,16 @@
+---
+
+- name: Install Evanti Heat on Server
+
+  block:
+    - name: Create Install folder for Windows Evanti Heat
+      win_file:
+        path: '{{ evantiheat_windows_install_dest }}'
+        state: directory
+
+    - name: Install Evanti Heat Agent Windows
+      raw: '{{ tempfile_evantiheat.path }}\{{ evantiheat_pkg_windows }} install SERVERADDRESS={{ heat_serveraddress }}'
+      args:
+        chdir: '{{ tempfile_evantiheat.path }}'
+
+  when: not evantiheat_already_installed

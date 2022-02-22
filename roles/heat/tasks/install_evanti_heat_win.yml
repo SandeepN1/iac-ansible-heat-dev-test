@@ -1,0 +1,28 @@
+---
+
+- name: Check of Evanti Heat Agent is Supported on Windows
+  assert:
+   that:
+     - ( ansible_os_family == 'Windows' )
+   fail_msg: "Windows Family {{ ansible_os_family }} is not Supported or maf_app is not defined"
+
+- name: Install and Configure Evanti Heat Agent
+
+  block:
+
+    - name: Check for Evanti Heat agent being Installed Windows
+      include_tasks: check_evanti_heat_win_install.yml
+
+    - name: Copy Evanti Heat Software for Install Windows
+      include_tasks: copy_software_windows.yml
+
+    - name: Install Evanti Heat Agent on Windows
+      include_tasks: evantiheat_win_install.yml
+
+    - name: Start Evanti Heat Agent On Windows
+      include_tasks: evantiheat_configure_windows.yml
+
+  always:
+
+     - name: Cleanup Evanti Heat Install Binaries Windows
+       include_tasks: cleanup_windows.yml

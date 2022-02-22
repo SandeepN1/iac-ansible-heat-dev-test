@@ -1,0 +1,16 @@
+---
+# vars file for heat
+
+evantiheat_s3_bucket: "maf-sources"
+
+heat_folder: "Heat_Ivanti"
+
+evantiheat_s3_path: '{{ heat_folder }}/windows_{{ ansible_os_name }}'
+
+_evantiheat_pkg_windows: 
+ 2019: 'Win_2019.exe'
+ 2016: 'Win_2016.exe'
+ 2012: 'Win_2012.exe'
+evantiheat_pkg_windows: "{{ _evantiheat_pkg_windows[ ansible_os_name ] }}"
+
+evantiheat_windows_install_dest: 'C:\Program Files\HEAT Software'

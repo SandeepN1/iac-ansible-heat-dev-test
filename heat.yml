@@ -1,0 +1,23 @@
+- hosts: all
+  gather_facts: true
+
+  pre_tasks:
+
+    - name: Set fact for Microsoft Windows Version for 2019
+      set_fact:
+        ansible_os_name: 2019
+      when: ansible_os_name == 'Microsoft Windows Server 2019 Datacenter'
+
+    - name: Set fact for Microsoft Windows Version for 2016
+      set_fact:
+        ansible_os_name: 2016
+      when: ansible_os_name == 'Microsoft Windows Server 2016 Datacenter'
+
+    - name: Set fact for Microsoft Windows Version for 2012
+      set_fact:
+        ansible_os_name: 2012
+      when: ansible_os_name == 'Microsoft Windows Server 2012 Datacenter'
+
+  roles:
+
+      - role: "heat"

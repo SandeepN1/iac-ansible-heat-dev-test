@@ -1,0 +1,7 @@
+---
+# defaults file for heat
+
+heat_serveraddress: "172.31.201.196"
+heat_modulelist: "VulnerabilityManagement"
+evantiheat_already_installed: false
+action_type: install

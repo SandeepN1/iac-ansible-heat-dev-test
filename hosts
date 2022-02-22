@@ -1,0 +1,2 @@
+[all]
+ansible-windows ansible_connection=winrm ansible_host=54.72.229.217 ansible_password='xxxxxxxxxxx' ansible_user=Administrator ansible_winrm_server_cert_validation=ignore ansible_port=5986

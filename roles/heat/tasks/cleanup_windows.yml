@@ -1,0 +1,10 @@
+---
+
+- name: Cleanup Evanti Heat Install Binaries
+  win_file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+     - '{{ tempfile_evantiheat.path }}'
+
+  when: not evantiheat_already_installed
